@@ -1,4 +1,4 @@
-from desafio1 import Pilha
+from desafio1_antigo import Pilha
 
 PRECEDENCIA = {"+": 1, "-": 1, "*": 2, "/": 2, "^": 3}
 ASSOC_DIREITA = {"^"}
