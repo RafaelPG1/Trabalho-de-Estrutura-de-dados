@@ -1,26 +1,50 @@
-from desafio1 import fmt, avaliar
-from desafio2 import tokenizar, converter
+# Nome: Rafael Peixoto Gonçalves  Matrícula: 2025010288
+# Nome: Antonio Everardo Liveira LIma Filho  Matrícula: 2025010334
+# Nome: Cid Xavier Pacheco Araujo  Matrícula: 2025010285
+
+from desafio1 import fmt, avaliar, tokenizar as tokenizar_posfixa
+from desafio2 import converter
 
 
-def formatar_lista(lista, formatador=str):
+def texto(lista):
+    # lista vazia vira "-"
     if not lista:
         return "-"
-    return " ".join(formatador(v) for v in lista)
+    return " ".join(lista)
 
 
-def imprimir_trace_desafio1(trace):
-    for token, pilha in trace:
-        print(f"{token:<5}| {formatar_lista(pilha, fmt)}")
-
-
-def imprimir_trace_desafio2(trace):
+def imprimir_desafio2(trace):
+    if not trace:
+        return
+    print(f"{'token':<5}| {'pilha':<11}| saida")
     for token, pilha, saida in trace:
-        print(f"{token:<5}| {formatar_lista(pilha):<11}| {formatar_lista(saida)}")
+        print(f"{token:<5}| {texto(pilha):<11}| {texto(saida)}")
 
 
-def processar_pos_fixa(tokens):
-    trace, resultado, erro = avaliar(tokens)
-    imprimir_trace_desafio1(trace)
+def imprimir_desafio1(trace):
+    if not trace:
+        return
+    print(f"{'token':<5}| pilha")
+    for token, pilha in trace:
+        numeros = " ".join(fmt(v) for v in pilha)
+        print(f"{token:<5}| {numeros}")
+
+
+def processar(expressao):
+    # --- desafio 2: converter para pós-fixa ---
+    trace2, posfixa, erro = converter(expressao)
+    imprimir_desafio2(trace2)
+
+    if erro:
+        print(erro)
+        return
+
+    print("posfixa:", posfixa)
+
+    # --- desafio 1: avaliar a pós-fixa ---
+    tokens = tokenizar_posfixa(posfixa)
+    trace1, resultado, erro = avaliar(tokens)
+    imprimir_desafio1(trace1)
 
     if erro:
         print(erro)
@@ -29,23 +53,14 @@ def processar_pos_fixa(tokens):
 
 
 def main():
-    expressao = input("Digite a expressão: ")
+    while True:
+        expressao = input("Digite a expressão (vazio para sair): ")
 
-    tokens, erro = tokenizar(expressao)
-    if erro:
-        print(erro)
-        return
+        if expressao.strip() == "":
+            break
 
-    trace, posfixa, erro = converter(tokens)
-    imprimir_trace_desafio2(trace)
-
-    if erro:
-        print(erro)
-        return
-
-    print("posfixa:", " ".join(posfixa))
-    processar_pos_fixa(posfixa)
+        processar(expressao)
+        print()
 
 
-if __name__ == "__main__":
-    main()
+main()

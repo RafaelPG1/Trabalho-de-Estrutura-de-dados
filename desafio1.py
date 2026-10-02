@@ -1,3 +1,8 @@
+# Nome: Rafael Peixoto Gonçalves  Matrícula: 2025010288
+# Nome: Antonio Everardo Liveira LIma Filho  Matrícula: 2025010334
+# Nome: Cid Xavier Pacheco Araujo  Matrícula: 2025010285
+
+
 class No:
     def __init__(self, valor, proximo=None):
         self.valor = valor
@@ -7,17 +12,17 @@ class No:
 class Pilha:
     def __init__(self):
         self.topo_no = None
-        self.n = 0
+        self.contador = 0
 
-    def empilhar(self, valor):
-        self.topo_no = No(valor, self.topo_no)
-        self.n += 1
+    def empilhar(self, novo_valor):
+        self.topo_no = No(novo_valor, self.topo_no)
+        self.contador += 1
 
     def desempilhar(self):
-        valor = self.topo_no.valor
+        valor_removido = self.topo_no.valor
         self.topo_no = self.topo_no.proximo
-        self.n -= 1
-        return valor
+        self.contador -= 1
+        return valor_removido
 
     def topo(self):
         return self.topo_no.valor
@@ -26,9 +31,10 @@ class Pilha:
         return self.topo_no is None
 
     def tamanho(self):
-        return self.n
+        return self.contador
 
-    def para_lista(self):
+    def visualizar(self):
+        # copia os valores da base até o topo, sem mexer na pilha
         itens = []
         atual = self.topo_no
         while atual is not None:
@@ -56,11 +62,10 @@ def avaliar(tokens):
             if pilha.tamanho() < 2:
                 return trace, None, "erro: operandos insuficientes"
 
-            # Definir a e b
+            # b sai primeiro, depois a
             b = pilha.desempilhar()
             a = pilha.desempilhar()
 
-            # calculadora
             if token == "+":
                 resultado = a + b
             elif token == "-":
@@ -72,7 +77,12 @@ def avaliar(tokens):
                     return trace, None, "erro: divisao por zero"
                 resultado = a / b
             elif token == "^":
-                resultado = a ** b
+                try:
+                    resultado = a ** b
+                except (OverflowError, ZeroDivisionError):
+                    return trace, None, "erro: resultado invalido"
+                if isinstance(resultado, complex):
+                    return trace, None, "erro: resultado invalido"
 
             pilha.empilhar(resultado)
         else:
@@ -81,7 +91,7 @@ def avaliar(tokens):
             except ValueError:
                 return trace, None, "erro: caractere invalido"
 
-        trace.append((token, pilha.para_lista()))
+        trace.append((token, pilha.visualizar()))
 
     if pilha.tamanho() != 1:
         return trace, None, "erro: expressao malformada"
