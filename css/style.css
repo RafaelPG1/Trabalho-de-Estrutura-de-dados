@@ -1,0 +1,38 @@
+:root{--bg:#f6f5f1;--card:#fff;--ink:#222;--mut:#6b6b66;--line:#e2e0d8;--acc:#1f6f5c;--soft:#e3f1ec;--key:#fff3c4;--code:#fbfaf7}
+@media(prefers-color-scheme:dark){:root{--bg:#171917;--card:#212421;--ink:#e8e8e3;--mut:#a0a29a;--line:#333730;--acc:#6cc7ae;--soft:#1f3a33;--key:#4a4220;--code:#1b1d1b}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,sans-serif}
+.app{display:grid;grid-template-columns:220px minmax(0,1fr) 430px;height:100vh}
+.col{min-width:0;overflow:auto;padding:20px;border-right:1px solid var(--line)}
+h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+#ftitle{font-size:18px;text-transform:none;letter-spacing:0;color:var(--ink)}.hint{color:var(--mut);margin:0 0 14px}
+.file{display:block;width:100%;text-align:left;padding:10px 12px;margin-bottom:6px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.file small{display:block;color:var(--mut)}.file.on{border-color:var(--acc);background:var(--soft);font-weight:600}
+#chain{font:13px/1.8 ui-monospace,monospace;color:var(--mut)}#chain .n{padding:2px 8px;border-radius:6px;border:1px solid var(--line)}#chain .n.on{background:var(--soft);border-color:var(--acc);color:var(--ink)}#chain p{font:12px/1.4 system-ui;margin:8px 0 0}
+.blk{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:14px;cursor:pointer;overflow:hidden}
+.blk:hover{border-color:var(--acc)}.blk.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--soft)}
+.blk header{display:flex;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--line)}
+.blk em{font-style:normal;font-size:12px;color:var(--acc);background:var(--soft);padding:1px 8px;border-radius:99px}
+.src{background:var(--code);padding:8px 0;overflow-x:auto;font:13px/1.6 ui-monospace,Consolas,monospace}
+.ln{display:flex;white-space:pre;padding-right:14px;min-width:max-content}.ln span{flex:0 0 42px;text-align:right;padding-right:12px;color:var(--mut);user-select:none}
+.ln.key{background:var(--key)}
+#info{overflow-wrap:anywhere}#info h3{margin:18px 0 4px;font-size:14px;color:var(--acc)}#info p{margin:0;white-space:pre-line}#info h1{font-size:19px;margin:0}
+.tag{color:var(--mut);font-size:13px}.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:3px 10px;margin:2px 4px 2px 0;font:13px inherit;cursor:pointer}
+.chip:hover{border-color:var(--acc)}.chip small{color:var(--mut)}.none{color:var(--mut)}
+.warn{background:var(--soft);border-left:3px solid var(--acc);padding:8px 12px;border-radius:0 8px 8px 0}
+.note{display:flex;gap:8px;margin:6px 0}.note span{min-width:0}.note b{background:var(--key);padding:0 6px;border-radius:4px;font:12px ui-monospace,monospace;height:fit-content}
+@media(max-width:1000px){
+html{scroll-padding-top:84px}body{overflow-x:hidden}
+.app{display:block;height:auto}.col{border:0;overflow:visible}
+nav.col{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left))}
+nav h2,#chain{display:none}
+#files{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.file{margin:0;min-height:48px;padding:8px 4px;text-align:center;font-size:14px;overflow-wrap:anywhere}.file small{font-size:11px}
+main.col{padding:16px max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left))}
+#ftitle{font-size:17px}.hint{font-size:14px;margin-bottom:12px}
+.blk{margin-bottom:12px;scroll-margin-top:84px}.blk header{gap:8px;align-items:center;padding:10px 12px}.blk header b{min-width:0;overflow-wrap:anywhere}.blk em{flex:none}
+.src{font-size:12.5px;line-height:1.65;-webkit-overflow-scrolling:touch}.ln span{flex-basis:34px;padding-right:10px}
+#info{scroll-margin-top:84px;background:var(--card);border-top:1px solid var(--line);margin-top:8px;padding:18px max(14px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+#info h1{font-size:18px}#info h3{margin-top:16px}
+.chip{padding:8px 12px;margin:3px 6px 3px 0;font-size:14px;min-height:40px}
+.warn{padding:10px 12px}
+}
