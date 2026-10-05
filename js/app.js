@@ -20,7 +20,7 @@ function render(){
  (notas(b).length?"<h3>Linhas importantes</h3>"+notas(b).map(([n,t])=>`<div class="note"><b>${n}</b><span>${t}</span></div>`).join(""):"");
 }
 document.addEventListener("click",e=>{const f=e.target.closest("[data-f]"),k=e.target.closest("[data-id]");
- if(f){file=f.dataset.f;sel=null;render()}
- else if(k){sel=k.dataset.id;file=byId[sel].arquivo;render();if(innerWidth<=1000||e.target.closest(".chip"))(innerWidth<=1000?$("#info"):document.querySelector(".blk.on")).scrollIntoView({behavior:"smooth",block:"start"})}});
+ if(f){file=f.dataset.f;sel=null;render();if(innerWidth>1000){$("#info").scrollTop=0;$("main").scrollTop=0}}
+ else if(k){sel=k.dataset.id;file=byId[sel].arquivo;render();if(innerWidth>1000)$("#info").scrollTop=0;if(innerWidth<=1000||e.target.closest(".chip"))(innerWidth<=1000?$("#info"):document.querySelector(".blk.on")).scrollIntoView({behavior:"smooth",block:"start"})}});
 document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.id)e.target.click()});
 render();})();
